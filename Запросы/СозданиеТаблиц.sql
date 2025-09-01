@@ -1,0 +1,80 @@
+--use [KURS]
+--GO
+
+--CREATE TABLE PrivilegeAndServices (
+--    PrSrID INT IDENTITY(1, 1) PRIMARY KEY,
+--    Name NVARCHAR(100) NOT NULL,
+--    Type NVARCHAR(100),
+--    Description TEXT
+--);
+--GO
+
+--CREATE TABLE Players
+--(
+--    PlayerID INT IDENTITY(1, 1) PRIMARY KEY,
+--    Nickname NVARCHAR(100) NOT NULL UNIQUE,
+--	PasswordHash VARBINARY(32) NOT NULL,
+--    RegistrationDate DATETIME(3) NOT NULL,
+--    ActivePrivilegeID INT,
+--    isBanned BIT DEFAULT 0,
+--    isMuted BIT DEFAULT 0,
+--    FOREIGN KEY (ActivePrivilegeID) REFERENCES PrivilegeAndServices(PrSrID)
+--);
+--GO
+
+--CREATE TABLE HistoryDonations (
+--    DonationID INT IDENTITY(1, 1) PRIMARY KEY,
+--    PlayerID INT NOT NULL,
+--    PrSrID INT NOT NULL,
+--    PaymentDate DATETIME(3) NOT NULL,
+--    Amount MONEY NOT NULL,
+--    FOREIGN KEY (PlayerID) REFERENCES Players(PlayerID),
+--    FOREIGN KEY (PrSrID) REFERENCES PrivilegeAndServices(PrSrID)
+--);
+--GO
+
+--CREATE TABLE Bans (
+--    BanID INT IDENTITY(1, 1) PRIMARY KEY,
+--    PlayerID INT NOT NULL,
+--    ModeratorID INT NOT NULL,
+--    Reason TEXT,
+--    StartDate DATETIME(3) NOT NULL,
+--    EndDate DATETIME(3),
+--    isPermanent BIT DEFAULT 0,
+--    FOREIGN KEY (PlayerID) REFERENCES Players(PlayerID),
+--	FOREIGN KEY (ModeratorID) REFERENCES Players(PlayerID)
+--);
+--GO
+
+--CREATE TABLE Unbans (
+--    UnbanID INT IDENTITY(1, 1) PRIMARY KEY,
+--    BanID INT NOT NULL,
+--    ModeratorID INT NOT NULL,
+--    UnbanDate DATETIME(3) NOT NULL,
+--    FOREIGN KEY (BanID) REFERENCES Bans(BanID),
+--	FOREIGN KEY (ModeratorID) REFERENCES Players(PlayerID)
+--);
+--GO
+
+--CREATE TABLE Mute (
+--    MuteID INT IDENTITY(1, 1) PRIMARY KEY,
+--    PlayerID INT NOT NULL,
+--    ModeratorID INT NOT NULL,
+--    Reason TEXT,
+--    StartDate DATETIME(3) NOT NULL,
+--    EndDate DATETIME(3),
+--    isPermanent BIT DEFAULT 0,
+--    FOREIGN KEY (PlayerID) REFERENCES Players(PlayerID),
+--	FOREIGN KEY (ModeratorID) REFERENCES Players(PlayerID)
+--);
+--GO
+
+--CREATE TABLE UnMutes (
+--    UnMuteID INT IDENTITY(1, 1) PRIMARY KEY,
+--    MuteID INT NOT NULL,
+--    ModeratorID INT NOT NULL,
+--    UnmuteDate DATETIME(3) NOT NULL,
+--    FOREIGN KEY (MuteID) REFERENCES Mute(MuteID),
+--	FOREIGN KEY (ModeratorID) REFERENCES Players(PlayerID)
+--);
+--GO
